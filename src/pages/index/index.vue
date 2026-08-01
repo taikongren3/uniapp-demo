@@ -1,34 +1,3 @@
-<script setup lang="ts">
-import { ref } from 'vue'
-
-const draft = ref('')
-const userMessage = ref('请按有赞「蛋糕烘焙」行业通用模版，自动帮我生成小票样式')
-
-const reasoning = [
-  '用户是正在有赞经营「蛋糕烘焙」行业的商家，想要进行小票样式自动创建服务。',
-  '首先，考虑到用户使用的有赞系统，我还需要了解有赞系统小票配置的能力，比如最大的间距是多少，有哪些字段能智能配置上等',
-  '为了更好地满足用户需求，我想要了解「蛋糕烘焙」都用了哪些小票模版，每种小票模版是怎么配置的',
-  '我还需要计算出大部分商家的配置样式，输出给用户绝大多数商家的样式模版',
-]
-
-function showTip(title: string) {
-  uni.showToast({ title, icon: 'none' })
-}
-
-function startNewChat() {
-  draft.value = ''
-  showTip('已创建新会话')
-}
-
-function sendMessage() {
-  const message = draft.value.trim()
-  if (!message) return
-
-  userMessage.value = message
-  draft.value = ''
-}
-</script>
-
 <template>
   <view class="assistant-page">
     <view class="top-bar">
@@ -129,7 +98,44 @@ function sendMessage() {
   </view>
 </template>
 
+<script setup lang="ts">
+import { ref } from 'vue'
+
+const draft = ref('')
+const userMessage = ref('请按有赞「蛋糕烘焙」行业通用模版，自动帮我生成小票样式')
+
+const reasoning = [
+  '用户是正在有赞经营「蛋糕烘焙」行业的商家，想要进行小票样式自动创建服务。',
+  '首先，考虑到用户使用的有赞系统，我还需要了解有赞系统小票配置的能力，比如最大的间距是多少，有哪些字段能智能配置上等',
+  '为了更好地满足用户需求，我想要了解「蛋糕烘焙」都用了哪些小票模版，每种小票模版是怎么配置的',
+  '我还需要计算出大部分商家的配置样式，输出给用户绝大多数商家的样式模版',
+]
+
+function showTip(title: string) {
+  uni.showToast({ title, icon: 'none' })
+}
+
+function startNewChat() {
+  draft.value = ''
+  showTip('已创建新会话')
+}
+
+function sendMessage() {
+  const message = draft.value.trim()
+  if (!message) return
+
+  userMessage.value = message
+  draft.value = ''
+}
+</script>
+
 <style scoped lang="scss">
+@mixin flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .assistant-page,
 .assistant-page view,
 .assistant-page text,
@@ -143,9 +149,9 @@ function sendMessage() {
   width: 100%;
   min-height: 100vh;
   overflow: hidden;
-  background: #f8f8f8;
+  background: $uni-bg-color-grey;
   box-shadow: inset 4px 0 0 #202033;
-  color: #333;
+  color: $uni-text-color;
   font-family:
     'PingFang SC',
     -apple-system,
@@ -170,7 +176,8 @@ function sendMessage() {
   min-width: 0;
 }
 
-.top-icon {
+.top-icon,
+.send-icon {
   width: 24px;
   height: 24px;
 }
@@ -197,9 +204,8 @@ function sendMessage() {
 }
 
 .text-action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
+
   width: 44px;
   height: 28px;
 }
@@ -212,9 +218,8 @@ function sendMessage() {
 }
 
 .icon-action {
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  @include flex-center;
+
   width: 28px;
   height: 28px;
 }
@@ -247,7 +252,7 @@ function sendMessage() {
   position: absolute;
   top: -16px;
   right: 0;
-  color: #999;
+  color: $uni-text-color-grey;
   font-size: 10px;
   line-height: 10px;
   letter-spacing: 0.4px;
@@ -258,7 +263,7 @@ function sendMessage() {
   padding: 10px;
   border-radius: 16px 16px 2px;
   background: #155bd4;
-  color: #fff;
+  color: $uni-text-color-inverse;
   font-size: 14px;
   line-height: 22px;
 }
@@ -269,17 +274,16 @@ function sendMessage() {
   margin-top: 12px;
   padding: 10px;
   border-radius: 16px 16px 16px 2px;
-  background: #fff;
+  background: $uni-bg-color;
 }
 
 .avatar-wrap {
+  @include flex-center;
+
   position: absolute;
   z-index: 2;
   top: 10px;
   left: 10px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   width: 20px;
   height: 20px;
 }
@@ -294,14 +298,14 @@ function sendMessage() {
   height: 432px;
   padding: 8px;
   border-radius: 4px;
-  background: #f8f8f8;
+  background: $uni-bg-color-grey;
 }
 
 .thinking-title {
   display: flex;
   align-items: center;
   height: 20px;
-  color: #333;
+  color: $uni-text-color;
   font-size: 14px;
   font-weight: 500;
   line-height: 20px;
@@ -366,7 +370,7 @@ function sendMessage() {
   flex: 1;
   min-width: 0;
   padding-right: 1px;
-  color: #999;
+  color: $uni-text-color-grey;
   font-size: 12px;
   line-height: 20px;
 }
@@ -384,7 +388,7 @@ function sendMessage() {
   flex: none;
   width: 100%;
   padding: 10px;
-  background: #f8f8f8;
+  background: $uni-bg-color-grey;
 }
 
 .composer-actions {
@@ -400,8 +404,8 @@ function sendMessage() {
   align-items: center;
   height: 28px;
   border-radius: 4px;
-  background: #fff;
-  color: #333;
+  background: $uni-bg-color;
+  color: $uni-text-color;
   font-size: 12px;
   font-weight: 500;
   line-height: 20px;
@@ -438,14 +442,14 @@ function sendMessage() {
   padding: 0 8px 0 10px;
   overflow: hidden;
   border-radius: 4px;
-  background: #fff;
+  background: $uni-bg-color;
 }
 
 .message-input {
   flex: 1;
   min-width: 0;
   height: 100%;
-  color: #333;
+  color: $uni-text-color;
   font-size: 14px;
   line-height: 22px;
   letter-spacing: 0.4px;
@@ -456,17 +460,11 @@ function sendMessage() {
 }
 
 .send-button {
-  display: flex;
+  @include flex-center;
+
   flex: none;
-  align-items: center;
-  justify-content: center;
   width: 32px;
   height: 32px;
   border-radius: 2px;
-}
-
-.send-icon {
-  width: 24px;
-  height: 24px;
 }
 </style>

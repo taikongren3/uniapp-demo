@@ -15,8 +15,8 @@ onLaunch(() => {
 <style lang="scss">
 page {
   min-height: 100%;
-  background: #f8f8f8;
-  color: #333;
+  background: $uni-bg-color-grey;
+  color: $uni-text-color;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
 }
 

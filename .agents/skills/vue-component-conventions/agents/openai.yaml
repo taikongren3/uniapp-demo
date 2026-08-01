@@ -1,0 +1,4 @@
+interface:
+  display_name: "Vue 组件规范"
+  short_description: "统一 Vue 组件结构，并提取复杂逻辑与重复样式代码"
+  default_prompt: "使用 $vue-component-conventions 编写或重构 Vue 单文件组件。"
